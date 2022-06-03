@@ -9,15 +9,16 @@ python3 Finance.py
 
 A file ~Finance.db~ is created upon first starting the application.
 * Menu
-[[[[file:images/menu.png]]]]
+[[file:images/menu.png]]
+
 ** Option 1
 Add an instance to the database using the following format:
 ~name amount date paid reason~
 
-name: person who is involved in the transcation.
-amount: positive number indicates that money is owed to you and negative number indicates that you owe the individual the specificed amount.
-date: mm/dd/yy format (default date=today)
-paid: 0 means the transcation is pending, 1 means the transcation has been completed. (default paid=0)
++ name: person who is involved in the transcation.
++ amount: positive number indicates that money is owed to you and negative number indicates that you owe the individual the specificed amount.
++ date: mm/dd/yy format (default date=today)
++ paid: 0 means the transcation is pending, 1 means the transcation has been completed. (default paid=0)
 
 ** Option 2
 Displays every transaction from the database.
@@ -26,7 +27,7 @@ Displays every transaction from the database.
 Toggle the paid status of a transaction by providing the instance ID. (first column in the display of Option 2)
 
 ** Option 4
-Delete a transaction from the database.
+Delete a transaction from the database by providing the instance ID. (first column in the display of Option 2)
 
 ** Option 5
 Display the calculated net amount owed to other individuals based on the *unpaid* transcations.
