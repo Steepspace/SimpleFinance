@@ -25,6 +25,7 @@ def insertMoney(name, amount, reason, date_t=date.today(), paid=0):
         c.execute("INSERT INTO Money (pid, amount, reason, date, paid) VALUES (?, ?, ?, ?, ?)",
                   (pid, amount, reason, date_t.__str__(), paid))
 
+# Update
 def updatePaid(items):
     with con:
         for item in items:
@@ -34,6 +35,11 @@ def updatePaid(items):
                 c.execute("UPDATE Money SET paid=1 WHERE id=?", (item,))
             else:
                 c.execute("UPDATE Money SET paid=0 WHERE id=?", (item,))
+
+def updateAll(name):
+    pid = getPersonId(name)
+    with con:
+        c.execute("UPDATE Money SET paid=1 WHERE pid=?", (pid,))
 
 # Delete
 def deleteMoneyInstance(items):
@@ -82,7 +88,8 @@ while(1):
           "5) Generate net report.",
           "6) Get person list.",
           "7) Generate net report for specific person.",
-          "8) Quit.", sep='\n')
+          "8) Mark all instances of user as paid.",
+          "9) Quit.", sep='\n')
     option = int(input("Enter option: "))
 
     if option == 1:
@@ -158,6 +165,10 @@ while(1):
             print("ERROR: Too many/few inputs")
             print("--------------------------")
             continue
+        if getPersonId(Uinput[0]) is None:
+            print("ERROR: User does not exist!")
+            print("--------------------------")
+            continue
         if num_inputs == 1:
             for x in getMoneyReportForPerson(Uinput[0]):
                 print("%4d | %10s | %7.2f | %-50s" % x)
@@ -168,6 +179,18 @@ while(1):
         continue
 
     elif option == 8:
+        Uinput = input("Format: name\n   --> ")
+        if getPersonId(Uinput) is None:
+            print("ERROR: User does not exist!")
+            print("--------------------------")
+            continue
+        updateAll(Uinput)
+        print("-------------------------------------")
+        print("Successfully updated instances for %s!" % Uinput)
+        print("-------------------------------------")
+        continue
+
+    elif option == 9:
         print("-------")
         print("Exiting")
         print("-------")

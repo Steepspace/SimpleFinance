@@ -39,4 +39,7 @@ Display the list of individuals within the database.
 Generate a list of all unpaid transcations given a specified person in the database.
 
 ** Option 8
+Mark all of the unpaid instances of a specified user as paid.
+
+** Option 9
 Exit program.
