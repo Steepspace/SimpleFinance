@@ -58,25 +58,28 @@ def getPersonId(name):
     return None if res is None else res[0]
 
 def getMoney():
-    c.execute("SELECT Money.id, date, firstname, amount, reason, paid FROM Money JOIN Person ON Money.pid = Person.id")
+    c.execute("SELECT Money.id, date, firstname, amount, reason, paid FROM Money JOIN Person ON Money.pid = Person.id ORDER BY date")
     return c.fetchall()
 
 def getMoneyReport():
     c.execute("""SELECT firstname, SUM(amount)
                  FROM Money JOIN Person ON Money.pid = Person.id
                  WHERE paid=0
-                 GROUP BY (firstname)""")
+                 GROUP BY (firstname)
+                 ORDER BY SUM(amount)""")
     return c.fetchall()
 
 def getMoneyReportForPerson(name, getAll=False):
     if getAll:
         c.execute("""SELECT Money.id, date, amount, reason
                      FROM Money JOIN Person ON Money.pid = Person.id
-                     WHERE firstname=?""", (name,))
+                     WHERE firstname=?
+                     ORDER BY date""", (name,))
     else:
         c.execute("""SELECT Money.id, date, amount, reason
                      FROM Money JOIN Person ON Money.pid = Person.id
-                     WHERE firstname=? AND paid=0""", (name,))
+                     WHERE firstname=? AND paid=0
+                     ORDER BY date""", (name,))
     return c.fetchall()
 
 while(1):
