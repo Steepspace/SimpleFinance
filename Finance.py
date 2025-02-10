@@ -120,11 +120,11 @@ while(1):
     elif option == 2:
         print("---------------------------------")
         for x in getMoney():
-            if len(x[4]) > 50:
+            if len(x[4]) > 100:
                 x = list(x)
-                x[4] = x[4][:50]
+                x[4] = x[4][:100]
                 x = tuple(x)
-            print("%4d | %10s | %-10s | %7.2f | %-50s | %d" % x)
+            print("%4d | %10s | %-10s | %7.2f | %-100s | %d" % x)
         print("---------------------------------")
         continue
 
@@ -174,10 +174,10 @@ while(1):
             continue
         if num_inputs == 1:
             for x in getMoneyReportForPerson(Uinput[0]):
-                print("%4d | %10s | %7.2f | %-50s" % x)
+                print("%4d | %10s | %7.2f | %-100s" % x)
         else:
             for x in getMoneyReportForPerson(Uinput[0], bool(int(Uinput[1]))):
-                print("%4d | %10s | %7.2f | %-50s" % x)
+                print("%4d | %10s | %7.2f | %-100s" % x)
         print("---------------------------------")
         continue
 
